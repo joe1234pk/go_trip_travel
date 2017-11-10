@@ -1,0 +1,67 @@
+.date_dialog { border: 1px solid #1897fe;z-index:999; }
+.date_control{
+	background:#f8f8f8;
+	height:40px;
+	line-height:40px;	
+	padding:0 10px;
+	border-bottom:1px solid #1897fe;
+}
+.date_control .date_prev,.date_control .date_next{
+	cursor:pointer;
+	position:relative;
+	top:7px;
+	width:24px;
+	height:25px;
+	display:inline-block;
+	background:url(../img/date_prev.jpg) no-repeat;
+}
+.date_next{
+	background:url(../img/date_next.jpg) no-repeat !important;
+}
+.date_choose{
+	text-align:center;
+	width:89.5%;
+	font-size:14px;
+	display:inline-block;
+}
+.date_table{
+	background:#fff;
+	width:100%;
+}
+.date_table th{
+	background:#1295fe;
+	color:#fff;
+	height:30px;
+	line-height:30px;
+}
+.date_table td{
+	border-bottom:1px solid #e7e7e7;
+	border-right:1px solid #e7e7e7;
+	text-align:center;
+	width:70px;
+	height:40px;
+	position:relative;
+	cursor:pointer;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+}
+.date_table td .date_val{
+	position:absolute;
+	top:2px;
+	left:2px;
+	color:#222;
+}
+.date_table td .blue{
+	color:#1295fe;
+	top:5px;
+	left:5px;
+	position:relative;
+}
+td.datepicker-diabled{
+	background:#eee;
+	cursor:not-allowed;
+}
+td.datepicker-diabled .date_val{
+	color:#999 !important;
+}
+
+

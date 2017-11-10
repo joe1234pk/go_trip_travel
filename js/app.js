@@ -21,6 +21,13 @@ $(document).ready(function(){
 
        });  
 
+        $('.js-example-basic-multiple#tags').select2({
+                placeholder: "Tag",
+                //allowClear: true
+
+       });  
+
+
 });
 
 

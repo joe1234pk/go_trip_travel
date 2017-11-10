@@ -1,0 +1,93 @@
+
+<!-- saved from url=(0049)https://graph.qq.com/jsdkproxy/PMProxy.html#1.0.1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+     
+	 <title>TC QQ Connect Client Flow PMProxy</title>
+	 <style type="text/css">
+		html, body{font-size:14px; line-height:180%;}
+		textarea {width:620px; background:#eaeaea;}
+
+		#result b{color:red;}
+	 </style>
+
+   <script src="./qc-1.0.1.js(1).download"></script><style>#haloword-pron { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -34px; }#haloword-pron:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -34px; }#haloword-open { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -17px; }#haloword-open:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -17px; }#haloword-close { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px 0; }#haloword-close:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px 0; }#haloword-add { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -51px; }#haloword-add:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -51px; }#haloword-remove { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -68px; }#haloword-remove:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -68px; }</style></head> 
+   <body> 
+   
+		<div>
+			<textarea style="height:60px; " readonly="1" id="dbg_console">
+			</textarea>
+		</div>
+
+    
+
+
+<!--<script type="text/javascript" src="https://graph.qq.com/jsdkproxy/qc.js"></script>-->
+
+<script type="text/javascript">
+	!function(){
+		var _ver = location.hash.replace(/^#*/g,"");
+				if(/^[_-]?(\d\.)+\d$/.test(_ver)){
+					_ver="-"+_ver;
+				}else{
+					_ver="";
+				}
+
+//		document.write('<script type="text/javascript" src="https://graph.qq.com/jsdkproxy/qc'+_ver+'.js"><'+'/script>');
+		//document.write will cause IE : SEC7111: HTTPS 安全受到 https://graph.qq.com/jsdkproxy/PMProxy.html 的威胁
+		var script = document.createElement("script");
+		script.src='https://graph.qq.com/jsdkproxy/qc'+_ver+'.js';
+		var head = document.getElementsByTagName("head");
+		if(head&&head[0]){
+			head[0].appendChild(script);
+		}
+	}();
+</script>
+<script type="text/javascript">
+
+	(function(){
+		function send(msg) {
+			if(!window.QC) {
+				var arg;
+				if( send.times > 10 ) {
+					//不再重试，认为丢包
+					send.times=0;
+					window.console && console.error("JSSDK超时丢包:" + msg.data);
+					return;
+				}
+				arg = {data:msg.data, origin:msg.origin};
+				setTimeout(function(){
+					send.times++;
+					send(arg);
+				},1000);
+				return;
+			}
+			QC.Console.log(msg.origin);
+			var dt = msg.data;
+			var args = QC.QueryString.parse(dt);
+			var req = new QC.XHRRequest(args.uri, QC.QueryString.parse(args.paras), args.fmt, args.method);
+			req.complete(function(respObj){
+				receive((respObj&&respObj.data)||{}, req);
+			}).send();
+		}
+		send.times = 0;
+
+		function receive(respData, req) {
+			var str = "" /*QC.QueryString.stringify(respData)*/, seq = req.seq, fmt=req.fmt, status = req.xhr.status;
+			switch(fmt) {
+				case "xml":
+//						debugger;
+						str = QC.XML.stringify(respData);
+					break;
+				case "json":
+						str = QC.JSON.stringify(respData);
+					break;
+			}
+			parent.postMessage([seq,status,fmt, str].join(":<.<<"+"#:"), "*");
+		}
+
+		window.addEventListener
+				? window.addEventListener("message", send, false)
+				: window.attachEvent("onmessage", send);
+	})();
+
+</script><div id="haloword-lookup" class="ui-widget-content ui-draggable"><div id="haloword-title"><span id="haloword-word"></span><a herf="#" id="haloword-pron" class="haloword-button" title="发音"></a><audio id="haloword-audio"></audio><div id="haloword-control-container"><a herf="#" id="haloword-add" class="haloword-button" title="加入单词表"></a><a herf="#" id="haloword-remove" class="haloword-button" title="移出单词表"></a><a href="https://graph.qq.com/jsdkproxy/PMProxy.html#" id="haloword-open" class="haloword-button" title="查看单词详细释义" target="_blank"></a><a herf="#" id="haloword-close" class="haloword-button" title="关闭查询窗"></a></div><br style="clear: both;"></div><div id="haloword-content"></div></div></body></html>
